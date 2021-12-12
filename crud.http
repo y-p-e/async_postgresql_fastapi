@@ -9,8 +9,18 @@ content-type: application/json
 ### READ
 http://localhost:8000/tasks
 
+
 ### READ
 http://localhost:8000/task/1
+
+
+### UPDATE
+PUT http://localhost:8000/task/1
+content-type: application/json
+
+{
+	"title": "クリーニングを取りに行くUPDATE3"
+}
 
 ### DELETE
 DELETE http://localhost:8000/task/1

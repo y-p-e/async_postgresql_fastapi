@@ -18,6 +18,15 @@ async def create_task(db: AsyncSession, task_create: task_schema.TaskCreate):
     await db.refresh(task)
     return task
 
+async def update_task(db: AsyncSession, task_id, task_create: task_schema.TaskCreate):
+    result = await (db.execute(select(task_model.Task).filter(task_model.Task.id == task_id)))
+    task = result.first()
+    task[0].title = task_create.title
+    db.add(task[0])
+    await db.commit()
+    await db.refresh(task[0])
+    return task[0]
+
 async def delete_task(db: AsyncSession, task_id):
     result = await db.execute(select(task_model.Task).filter(task_model.Task.id == task_id))
     task = result.first()
